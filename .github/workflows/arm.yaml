@@ -60,7 +60,7 @@ jobs:
           name: library-report.html
           paths: 
             - 'project/EWARM/Debug/C-STAT/*.html'
-            - '/tmp/*.log'
+            - 'tmp/*.log'
           if-no-files-found: error
 
   build-project:
