@@ -18,6 +18,7 @@ on:
 # Environment variable used for all jobs within this workflow
 env:
   IAR_LMS_BEARER_TOKEN: ${{ secrets.IAR_LMS_BEARER_TOKEN }}
+  LANG: "ja_JP.SJIS"
 
 jobs:
   build-library:
