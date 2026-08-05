@@ -58,8 +58,9 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: library-report.html
-          path: project/EWARM/Debug/C-STAT/*.html
-          path: /tmp/*.log
+          paths: 
+            - project/EWARM/Debug/C-STAT/*.html
+            - /tmp/*.log
           if-no-files-found: error
 
   build-project:
