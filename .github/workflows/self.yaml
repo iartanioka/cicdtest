@@ -43,3 +43,6 @@ jobs:
         run: |
           /opt/iar/cxarm/common/bin/iarbuild project/EWARM/ChecksumLibrary.ewp -cspybat_cmds Debug -output_type sh
           /opt/iar/cxarm/common/bin/CSpyBat --dbg_log_file build_log.log --timeout 2500 -f project.Debug.general.xcl --backend -f project.Debug.driver.xcl
+
+          get-content build_log.log
+          get-content project.Debug.driver.xcl
