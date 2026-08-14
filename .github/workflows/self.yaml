@@ -1,0 +1,41 @@
+name: IAR project on GitHub Actions
+
+# This workflow uses cloud-ready images with
+# the IAR Build Tools for Arm with ST device support
+# from: https://github.com/orgs/iarsystems/packages/arm
+
+on: 
+  # Run the workflow when new code is pushed to the repository
+  push:
+  # Run the workflow manually
+  workflow_dispatch:
+  # Run the workflow on a nightly schedule
+  schedule:
+  - cron: "0 3 * * *"
+
+# Set a new GitHub Actions Secret named IAR_LMS_BEARER_TOKEN
+# for your repository. The secret is then propagated to an
+# Environment variable used for all jobs within this workflow
+env:
+  IAR_LMS_BEARER_TOKEN: ${{ secrets.IAR_LMS_BEARER_TOKEN }}
+  LANG: "ja_JP.SJIS"
+
+jobs:
+  build:
+    name: Build
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v6
+
+      - name: Check compiler version
+        run: iccarm --version
+      
+      - name: Build library
+        run: |
+          /opt/iar/cxarm/common/bin/iarbuild project/EWARM/ChecksumLibrary.ewp -make Debug -log all
+
+      - name: C-STAT - Library
+        run: |
+          /opt/iar/cxarm/common/bin/iarbuild project/EWARM/ChecksumLibrary.ewp -cstat_analyze Debug -log all
+          /opt/iar/cxarm/common/bin/iarbuild project/EWARM/ChecksumLibrary.ewp -cstat_report Debug -log all
+
