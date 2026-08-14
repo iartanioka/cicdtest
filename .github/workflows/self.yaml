@@ -39,3 +39,6 @@ jobs:
           /opt/iar/cxarm/common/bin/iarbuild project/EWARM/ChecksumLibrary.ewp -cstat_analyze Debug -log all
           /opt/iar/cxarm/common/bin/iarbuild project/EWARM/ChecksumLibrary.ewp -cstat_report Debug -log all
 
+      - name: Debug
+        run: |
+          /opt/iar/cxarm/common/bin/iarbuild project/EWARM/ChecksumLibrary.ewp -cspybat_cmds Debug -output_type sh
